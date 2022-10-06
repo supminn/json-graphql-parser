@@ -1,3 +1,80 @@
+const clauseSchema = {
+  type: "object",
+  additionalProperties: false,
+  properties: {
+    operator: {
+      type: "string",
+    },
+    class: {
+      type: "string",
+    },
+    conditions: {
+      type: "array",
+      minContains: 1,
+      items: [
+        {
+          type: "object",
+          additionalProperties: false,
+          properties: {
+            field: {
+              type: "string",
+            },
+            operator: {
+              type: "string",
+            },
+            value: {
+              type: ["number", "string", "boolean"],
+            },
+            class: {
+              type: "string",
+            },
+            clause: {
+              type: "object",
+              additionalProperties: false,
+              properties: {
+                operator: {
+                  type: "string",
+                },
+                class: {
+                  type: "string",
+                },
+                conditions: {
+                  type: "array",
+                  minContains: 1,
+                  items: [
+                    {
+                      type: "object",
+                      additionalProperties: false,
+                      properties: {
+                        field: {
+                          type: "string",
+                        },
+                        operator: {
+                          type: "string",
+                        },
+                        value: {
+                          type: ["number", "string", "boolean"],
+                        },
+                        class: {
+                          type: "string",
+                        },
+                      },
+                      required: ["field", "operator", "value"],
+                    },
+                  ],
+                },
+              },
+              required: ["conditions"],
+            },
+          },
+          required: ["field", "operator", "value"],
+        },
+      ],
+    },
+  },
+  required: ["conditions"],
+};
+
 export const schema = {
   $schema: "http://json-schema.org/draft-04/schema#",
   type: "object",
